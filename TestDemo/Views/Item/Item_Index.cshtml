@@ -32,6 +32,11 @@
                             <span v-else>{{item.amount}}</span>
                         </td>
                         <td>
+                            <span v-if="item.showupdate" style="display:flex;justify-content:space-evenly">
+                                <span class="fa fa-check green-link" v-on:click="Update_Item(item)"></span>
+                                <span class="fa fa-times red-link" v-on:click="Show_Update(item)"></span>
+                            </span>
+                            <span v-else class="fa fa-pencil blue-link" title="編輯" v-on:click="Show_Update(item)"></span>
                         </td>
                         <td>
                         </td>
@@ -91,6 +96,30 @@
                         alert(error)
                     })
             }, //取得項目清單
+            Update_Item: function (item) {
+                axios({
+                    url: "../Item/Update_Item",
+                    method: "POST",
+                    data: {
+                        data: item,
+                    },
+                })
+                    .then(function (response) {
+                        if ($.trim(response.data) == "true") {
+                            item.showupdate = !item.showupdate
+                        }
+                        else {
+                            alert("修改失敗！" + response.data)
+                            form.Get_Item_List()
+                        }
+                    })
+                    .catch(function (error) {
+                        alert(error)
+                    })
+            }, //修改員工薪資項目
+            Show_Update: function (item) {
+                item.showupdate = !item.showupdate
+            }, //顯示編輯
         }, //方法
     }) //套用Vue(Form)
 </script>

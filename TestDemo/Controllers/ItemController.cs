@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TestDemo.Models;
+using TestDemo.ViewModels;
 
 namespace TestDemo.Controllers
 {
@@ -35,6 +36,19 @@ namespace TestDemo.Controllers
             var List = _itemModel.Get_Item_List();
 
             return Json(new { List }, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #endregion
+
+        #region 動作
+
+        #region 修改項目
+        public string Update_Item(ItemViewModel data)
+        {
+            string result = _itemModel.Update_Item(data);
+
+            return result;
         }
         #endregion
 

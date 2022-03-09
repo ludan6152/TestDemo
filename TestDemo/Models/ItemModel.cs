@@ -57,7 +57,39 @@ namespace TestDemo.Models
 
         #region 動作
 
+        #region 修改項目
+        public string Update_Item(ItemViewModel data)
+        {
+            string mRet = "";
 
+            try
+            {
+                string sql = $@"
+                UPDATE ITEM_TABLE 
+                SET ITEM_NAME = @ITEM_NAME, AMOUNT = @AMOUNT 
+                WHERE ITEM_ID = @ITEM_ID";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("ITEM_ID", data.itemid);
+                    cmd.Parameters.AddWithValue("ITEM_NAME", data.itemname);
+                    cmd.Parameters.AddWithValue("AMOUNT", data.amount);
+
+                    cmd.ExecuteNonQuery();
+
+                    mRet = "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                mRet = ex.Message;
+            }
+
+            return mRet;
+        }
+        #endregion
 
         #endregion
     }
