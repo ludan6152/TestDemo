@@ -1,0 +1,411 @@
+﻿/*字體*/
+body, ::-webkit-input-placeholder {
+    font-family: Microsoft JhengHei;
+    padding: 0 !important;
+    font-size: 14px;
+}
+/*字體*/
+
+/*輸入框*/
+.text-box {
+    width: -webkit-fill-available;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    text-align: center;
+}
+
+    .text-box:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+
+textarea.fixed {
+    overflow-y: auto;
+    resize: none;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+}
+/*輸入框*/
+
+/*日曆*/
+.ui-datepicker {
+    z-index: 1600 !important;
+}
+/*日曆*/
+
+/*連結*/
+.blue-link {
+    color: cornflowerblue;
+    cursor: pointer;
+}
+
+    .blue-link:hover {
+        color: dodgerblue;
+    }
+
+.red-link {
+    color: red;
+    cursor: pointer;
+}
+
+    .red-link:hover {
+        color: darkred;
+    }
+
+.green-link {
+    color: green;
+    cursor: pointer;
+}
+
+    .green-link:hover {
+        color: darkgreen;
+    }
+
+.ban-link {
+    color: lightgrey;
+    cursor: not-allowed;
+}
+
+.square {
+    border-radius: 0 !important;
+}
+
+.square-sm {
+    border-radius: 0 !important;
+    line-height: 0.5 !important;
+}
+/*連結*/
+
+/*IOS單選框*/
+input[type="checkbox"].ios8-switch {
+    position: absolute;
+    margin: 8px 0 0 16px;
+}
+
+    input[type="checkbox"].ios8-switch ~ label {
+        position: relative;
+        padding: 8px 0 0 50px;
+        line-height: 2.0em;
+    }
+
+        input[type="checkbox"].ios8-switch ~ label:before {
+            content: "";
+            position: absolute;
+            display: block;
+            left: 0;
+            top: 0;
+            width: 40px; /* x*5 */
+            height: 24px; /* x*3 */
+            border-radius: 16px; /* x*2 */
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        input[type="checkbox"].ios8-switch ~ label:after {
+            content: "";
+            position: absolute;
+            display: block;
+            left: 0px;
+            top: 0px;
+            width: 24px; /* x*3 */
+            height: 24px; /* x*3 */
+            border-radius: 16px; /* x*2 */
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        input[type="checkbox"].ios8-switch ~ label:hover:after {
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+
+    input[type="checkbox"].ios8-switch:checked ~ label:after {
+        margin-left: 16px;
+    }
+
+    input[type="checkbox"].ios8-switch:checked ~ label:before {
+        background: #55D069;
+    }
+
+/* SMALL */
+
+input[type="checkbox"].ios8-switch-sm {
+    margin: 5px 0 0 10px;
+}
+
+    input[type="checkbox"].ios8-switch-sm ~ label {
+        position: relative;
+        padding: 0 0 0 32px;
+        line-height: 1.3em;
+    }
+
+        input[type="checkbox"].ios8-switch-sm ~ label:before {
+            width: 25px; /* x*5 */
+            height: 15px; /* x*3 */
+            border-radius: 10px; /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-sm ~ label:after {
+            width: 15px; /* x*3 */
+            height: 15px; /* x*3 */
+            border-radius: 10px; /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-sm ~ label:hover:after {
+            box-shadow: 0 0 3px rgba(0,0,0,0.3);
+        }
+
+    input[type="checkbox"].ios8-switch-sm:checked ~ label:after {
+        margin-left: 10px; /* x*2 */
+    }
+
+/* LARGE */
+
+input[type="checkbox"].ios8-switch-lg {
+    margin: 10px 0 0 20px;
+}
+
+    input[type="checkbox"].ios8-switch-lg ~ label {
+        position: relative;
+        padding: 7px 0 0 60px;
+        line-height: 2.3em;
+    }
+
+        input[type="checkbox"].ios8-switch-lg ~ label:before {
+            width: 50px; /* x*5 */
+            height: 30px; /* x*3 */
+            border-radius: 20px; /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-lg ~ label:after {
+            width: 30px; /* x*3 */
+            height: 30px; /* x*3 */
+            border-radius: 20px; /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-lg ~ label:hover:after {
+            box-shadow: 0 0 8px rgba(0,0,0,0.3);
+        }
+
+    input[type="checkbox"].ios8-switch-lg:checked ~ label:after {
+        margin-left: 20px; /* x*2 */
+    }
+/*IOS單選框*/
+
+/*標題列&頁尾&*/
+.title {
+    background-color: #008000;
+    height: 40px;
+    min-height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 999;
+}
+
+.logo {
+    line-height: 40px;
+    background-color: #006000;
+    padding: 0 10px;
+    font-size: 18px;
+    color: #FFFFFF;
+    cursor: default;
+    font-weight: bold;
+}
+
+.site-title {
+    line-height: 40px;
+    cursor: default;
+    float: left;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.userlog {
+    float: right;
+    display: flex;
+}
+
+.logout {
+    width: 70px;
+    line-height: 40px;
+    height: 40px;
+    padding-left: 10px;
+}
+
+.username {
+    line-height: 40px;
+    color: white;
+    font-weight: bold;
+}
+/*標題列&頁尾&*/
+
+/*內容*/
+table th, table td {
+    vertical-align: middle !important;
+}
+
+thead, .header {
+    background-color: #ecf9e6;
+}
+
+.table-scroll {
+    overflow-y: scroll;
+    resize: none;
+    /*max-height: 600px;*/
+    border: 2px solid #dee2e6;
+}
+
+    .table-scroll table {
+        margin-bottom: 0 !important;
+    }
+
+    .table-scroll thead tr th {
+        position: sticky;
+        top: -1px;
+        z-index: 2;
+        background-color: #ecf9e6;
+    }
+
+    .table-scroll tfoot tr th {
+        position: sticky;
+        bottom: -1px;
+        z-index: 2;
+        background-color: #ecf9e6;
+    }
+
+.innertable {
+    table-layout: fixed;
+    margin: 0 !important;
+}
+
+.innertd {
+    border: none;
+    padding: 0 !important;
+}
+
+.text-left {
+    text-align: left;
+}
+
+a.side-btn, a.side-btn:hover, a.side-btn:focus {
+    text-decoration: none !important;
+}
+
+.dropdown-toggle::after {
+    content: none !important;
+}
+
+.form-control {
+    padding: .375rem .5rem;
+}
+
+.table td, .table th {
+    padding: .5rem;
+}
+
+.body {
+    width: 100%;
+    text-align: center;
+    display: inline-flex;
+}
+
+.site-body {
+    display: table;
+    height: calc(100vh - 40px);
+    width: 100%;
+    text-align: center;
+    padding: 50px 10px 10px 60px;
+}
+
+.side-bar {
+    z-index: 3;
+    display: table;
+    height: 100%;
+    width: 50px;
+    float: left;
+    text-align: center;
+    font-weight: bold;
+    position: fixed;
+    z-index: 99;
+    padding-top: 40px;
+}
+
+.side-transition {
+    position: relative;
+    width: 0;
+    height: 100%;
+}
+
+    .side-transition.active .transition-btn {
+        transform: rotate(180deg);
+    }
+
+    .side-transition.active .side-text {
+        display: unset;
+    }
+
+.side-group {
+    display: inline-table;
+    background-color: beige;
+    border-right: 1px #008000 solid;
+    padding: 10px;
+    height: 100%;
+    text-align: left;
+}
+
+.transition-btn {
+    font-size: 35px;
+}
+
+.side-btn {
+    display: inline-block;
+    font-size: 30px;
+    color: cadetblue;
+    cursor: pointer;
+    width: max-content;
+}
+
+    .side-btn:hover {
+        color: darkcyan;
+    }
+
+.side-text {
+    display: none;
+}
+
+.titleline {
+    position: relative;
+    overflow: hidden;
+    font-weight: bolder;
+    font-size: medium;
+}
+
+    .titleline:after {
+        display: inline-block;
+        content: "";
+        height: 4px;
+        background: gainsboro;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+    }
+/*內容*/

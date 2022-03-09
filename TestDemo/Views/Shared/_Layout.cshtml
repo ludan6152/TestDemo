@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
+    <title>TestDemo - @ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/test-style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/vue.min.js"></script>
+    <script src="~/Scripts/axios.min.js"></script>
+    <script src="~/Scripts/test-script.js"></script>
+</head>
+
+<body>
+    <div class="title">
+        <div class="logo">鄭晉維</div>
+        <div class="site-title">Demo - @ViewBag.Title</div>
+        <div></div>
+    </div>
+
+    <div class="body">
+        <div class="side-bar">
+            <div class="side-transition">
+                <div class="side-group">
+                    <div class="side-btn" onclick="TransitionBtn(this)">
+                        <span title="展開&收縮" class="transition-btn fa fa-chevron-circle-right"></span>
+                    </div>
+
+                    <a id="Item_Index_link" class="side-btn" onclick="loading()" href="@Url.Action("Item_Index", "Item", new { Time = DateTime.Now.ToString("yyyyMMddHHmmss") })">
+                        <span title="項目清單" class="fa fa-list-alt"></span>
+                        <span class="side-text">項目清單</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="site-body">
+            @RenderBody()
+        </div>
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+<script type="text/javascript">
+    $(function () {
+
+    })
+</script>
+
+<style type="text/css">
+</style>
