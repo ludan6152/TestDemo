@@ -61,6 +61,15 @@ namespace TestDemo.Controllers
         }
         #endregion
 
+        #region 刪除項目
+        public string Delete_Item(string itemid)
+        {
+            string result = _itemModel.Delete_Item(itemid);
+
+            return result;
+        }
+        #endregion
+
         #endregion
     }
 }

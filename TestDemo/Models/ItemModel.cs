@@ -142,7 +142,21 @@ namespace TestDemo.Models
 
             try
             {
+                string sql = $@"
+                DELETE FROM ITEM_TABLE 
+                WHERE ITEM_ID = @ITEM_ID";
 
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("ITEM_ID", itemid);
+
+                    cmd.ExecuteNonQuery();
+
+                    mRet = "true";
+                }
             }
             catch (Exception ex)
             {

@@ -39,6 +39,7 @@
                             <span v-else class="fa fa-pencil blue-link" title="編輯" v-on:click="Show_Update(item)"></span>
                         </td>
                         <td>
+                            <span class="fa fa-trash red-link" v-on:click="Delete_Item(item, index)"></span>
                         </td>
                     </tr>
                 </tbody>
@@ -137,6 +138,28 @@
                         alert(error)
                     })
             }, //取消編輯
+            Delete_Item: function (item, index) {
+                if (confirm("確定要刪除？")) {
+                    axios({
+                        url: "../Item/Delete_Item",
+                        method: "POST",
+                        data: {
+                            itemid: item.itemid,
+                        },
+                    })
+                        .then(function (response) {
+                            if ($.trim(response.data) == "true") {
+                                form.serverlist.splice(index, 1)
+                            }
+                            else {
+                                alert("刪除失敗！" + response.data)
+                            }
+                        })
+                        .catch(function (error) {
+                            alert(error)
+                        })
+                }
+            }, //刪除項目
         }, //方法
     }) //套用Vue(Form)
 </script>
