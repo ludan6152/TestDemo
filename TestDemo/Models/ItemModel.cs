@@ -174,7 +174,25 @@ namespace TestDemo.Models
 
             try
             {
+                string sql = $@"
+                INSERT INTO ITEM_TABLE 
+                (ITEM_ID, ITEM_NAME, AMOUNT) 
+                VALUES 
+                (@ITEM_ID, @ITEM_NAME, @AMOUNT)";
 
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("ITEM_ID", data.itemid);
+                    cmd.Parameters.AddWithValue("ITEM_NAME", data.itemname);
+                    cmd.Parameters.AddWithValue("AMOUNT", data.amount);
+
+                    cmd.ExecuteNonQuery();
+
+                    mRet = "true";
+                }
             }
             catch (Exception ex)
             {

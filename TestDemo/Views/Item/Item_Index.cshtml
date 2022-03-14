@@ -20,10 +20,16 @@
                 <tbody>
                     <tr v-for="(item, index) in serverlist">
                         <td>
-                            <span>{{item.itemid}}</span>
+                            <span v-if="item.showupdate && item.newitem">
+                                <input type="text" class="text-box" v-model="item.itemid" />
+                            </span>
+                            <span v-else>{{item.itemid}}</span>
                         </td>
                         <td>
-                            <span>{{item.itemname}}</span>
+                            <span v-if="item.showupdate">
+                                <input type="text" class="text-box" v-model="item.itemname" />
+                            </span>
+                            <span v-else>{{item.itemname}}</span>
                         </td>
                         <td>
                             <span v-if="item.showupdate">
@@ -34,12 +40,12 @@
                         <td>
                             <span v-if="item.showupdate" style="display:flex;justify-content:space-evenly">
                                 <span class="fa fa-check green-link" v-on:click="Update_Item(item)"></span>
-                                <span class="fa fa-times red-link" v-on:click="Cancel_Update(item)"></span>
+                                <span class="fa fa-times red-link" v-on:click="Cancel_Update(item, index)"></span>
                             </span>
                             <span v-else class="fa fa-pencil blue-link" title="編輯" v-on:click="Show_Update(item)"></span>
                         </td>
                         <td>
-                            <span class="fa fa-trash red-link" v-on:click="Delete_Item(item, index)"></span>
+                            <span v-if="!item.newitem" class="fa fa-trash red-link" v-on:click="Delete_Item(item, index)"></span>
                         </td>
                     </tr>
                 </tbody>
@@ -48,8 +54,9 @@
                     <tr>
                         <th colspan="2">合計</th>
                         <th>{{Amount_Total}}</th>
-                        <th colspan="2">
-
+                        <th></th>
+                        <th>
+                            <span class="btn btn-success" style="line-height:1;width:100%" v-on:click="Add_Empty_Item">新增</span>
                         </th>
                     </tr>
                 </tfoot>
@@ -90,6 +97,7 @@
                         form.serverlist = response.data.List
 
                         form.serverlist.forEach((o, i) => {
+                            Vue.set(form.serverlist[i], 'newitem', false)
                             Vue.set(form.serverlist[i], 'showupdate', false)
                         })
                     })
@@ -103,15 +111,16 @@
                     method: "POST",
                     data: {
                         data: item,
+                        newitem: item.newitem,
                     },
                 })
                     .then(function (response) {
                         if ($.trim(response.data) == "true") {
+                            item.newitem = false
                             item.showupdate = !item.showupdate
                         }
                         else {
                             alert("修改失敗！" + response.data)
-                            form.Get_Item_List()
                         }
                     })
                     .catch(function (error) {
@@ -121,22 +130,27 @@
             Show_Update: function (item) {
                 item.showupdate = !item.showupdate
             }, //顯示編輯
-            Cancel_Update: function (item) {
-                axios({
-                    url: "../Item/Get_Item_Data",
-                    method: "POST",
-                    data: {
-                        itemid: item.itemid,
-                    },
-                })
-                    .then(function (response) {
-                        item.showupdate = !item.showupdate
-                        item.itemname = response.data.Data.itemname
-                        item.amount = response.data.Data.amount
+            Cancel_Update: function (item, index) {
+                if (item.newitem) {
+                    form.serverlist.splice(index, 1)
+                }
+                else {
+                    axios({
+                        url: "../Item/Get_Item_Data",
+                        method: "POST",
+                        data: {
+                            itemid: item.itemid,
+                        },
                     })
-                    .catch(function (error) {
-                        alert(error)
-                    })
+                        .then(function (response) {
+                            item.showupdate = !item.showupdate
+                            item.itemname = response.data.Data.itemname
+                            item.amount = response.data.Data.amount
+                        })
+                        .catch(function (error) {
+                            alert(error)
+                        })
+                }
             }, //取消編輯
             Delete_Item: function (item, index) {
                 if (confirm("確定要刪除？")) {
@@ -160,6 +174,20 @@
                         })
                 }
             }, //刪除項目
+            Add_Empty_Item: function () {
+                form.serverlist.push({
+                    itemid: '',
+                    itemname: '',
+                    amount: '0',
+                    showupdate: false,
+                    newitem: true,
+                })
+
+                let scroll = $("div#vue_Form").find("div.table-scroll")
+                setTimeout(() => {
+                    scroll.scrollTop(scroll.prop("scrollHeight"))
+                }, 1)
+            }, //新增項目列
         }, //方法
     }) //套用Vue(Form)
 </script>

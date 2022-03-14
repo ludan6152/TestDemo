@@ -53,9 +53,25 @@ namespace TestDemo.Controllers
         #region 動作
 
         #region 修改項目
-        public string Update_Item(ItemViewModel data)
+        public string Update_Item(ItemViewModel data, bool newitem)
         {
-            string result = _itemModel.Update_Item(data);
+            string result = "";
+
+            if (String.IsNullOrEmpty(_itemModel.Get_Item_Data(data.itemid).itemid))
+            {
+                result = _itemModel.Insert_Item(data);
+            }
+            else
+            {
+                if (newitem)
+                {
+                    result = "項目編號" + data.itemid + "已存在！";
+                }
+                else
+                {
+                    result = _itemModel.Update_Item(data);
+                }
+            }
 
             return result;
         }
@@ -65,6 +81,24 @@ namespace TestDemo.Controllers
         public string Delete_Item(string itemid)
         {
             string result = _itemModel.Delete_Item(itemid);
+
+            return result;
+        }
+        #endregion
+
+        #region 新增項目
+        public string Insert_Item(ItemViewModel data)
+        {
+            string result = "";
+
+            if (_itemModel.Get_Item_Data(data.itemid) is null)
+            {
+                result = _itemModel.Insert_Item(data);
+            }
+            else
+            {
+                result = "項目編號" + data.itemid + "已存在！";
+            }
 
             return result;
         }
