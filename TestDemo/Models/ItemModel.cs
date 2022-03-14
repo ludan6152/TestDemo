@@ -15,6 +15,7 @@ namespace TestDemo.Models
 
         #region 資料
 
+        #region 取得項目清單
         public IEnumerable<ItemViewModel> Get_Item_List()
         {
             IEnumerable<ItemViewModel> mRet = Enumerable.Empty<ItemViewModel>();
@@ -52,6 +53,49 @@ namespace TestDemo.Models
 
             return mRet;
         }
+        #endregion
+
+        #region 取得項目資料
+        public ItemViewModel Get_Item_Data(string itemid)
+        {
+            ItemViewModel mRet = new ItemViewModel();
+
+            try
+            {
+                string sql = $@"
+                SELECT ITEM_ID, ITEM_NAME, AMOUNT 
+                FROM ITEM_TABLE 
+                WHERE ITEM_ID = @ITEM_ID";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("ITEM_ID", itemid);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        ItemViewModel Data = new ItemViewModel()
+                        {
+                            itemid = Convert.ToString(reader["ITEM_ID"]).Trim(),
+                            itemname = Convert.ToString(reader["ITEM_NAME"]).Trim(),
+                            amount = Convert.ToString(reader["AMOUNT"]).Trim(),
+                        };
+
+                        mRet = Data;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return mRet;
+        }
+        #endregion
 
         #endregion
 
@@ -81,6 +125,42 @@ namespace TestDemo.Models
 
                     mRet = "true";
                 }
+            }
+            catch (Exception ex)
+            {
+                mRet = ex.Message;
+            }
+
+            return mRet;
+        }
+        #endregion
+
+        #region 刪除項目
+        public string Delete_Item(string itemid)
+        {
+            string mRet = "";
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                mRet = ex.Message;
+            }
+
+            return mRet;
+        }
+        #endregion
+
+        #region 新增項目
+        public string Insert_Item(ItemViewModel data)
+        {
+            string mRet = "";
+
+            try
+            {
+
             }
             catch (Exception ex)
             {

@@ -15,5 +15,17 @@ namespace TestDemo.Models
         #region 修改項目
         string Update_Item(ItemViewModel data);
         #endregion
+
+        #region 取得項目資料
+        ItemViewModel Get_Item_Data(string itemid);
+        #endregion
+
+        #region 刪除項目
+        string Delete_Item(string itemid);
+        #endregion
+
+        #region 新增項目
+        string Insert_Item(ItemViewModel data);
+        #endregion
     }
 }

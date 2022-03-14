@@ -34,7 +34,7 @@
                         <td>
                             <span v-if="item.showupdate" style="display:flex;justify-content:space-evenly">
                                 <span class="fa fa-check green-link" v-on:click="Update_Item(item)"></span>
-                                <span class="fa fa-times red-link" v-on:click="Show_Update(item)"></span>
+                                <span class="fa fa-times red-link" v-on:click="Cancel_Update(item)"></span>
                             </span>
                             <span v-else class="fa fa-pencil blue-link" title="編輯" v-on:click="Show_Update(item)"></span>
                         </td>
@@ -120,6 +120,23 @@
             Show_Update: function (item) {
                 item.showupdate = !item.showupdate
             }, //顯示編輯
+            Cancel_Update: function (item) {
+                axios({
+                    url: "../Item/Get_Item_Data",
+                    method: "POST",
+                    data: {
+                        itemid: item.itemid,
+                    },
+                })
+                    .then(function (response) {
+                        item.showupdate = !item.showupdate
+                        item.itemname = response.data.Data.itemname
+                        item.amount = response.data.Data.amount
+                    })
+                    .catch(function (error) {
+                        alert(error)
+                    })
+            }, //取消編輯
         }, //方法
     }) //套用Vue(Form)
 </script>

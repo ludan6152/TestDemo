@@ -39,6 +39,15 @@ namespace TestDemo.Controllers
         }
         #endregion
 
+        #region 取得項目資料
+        public JsonResult Get_Item_Data(string itemid)
+        {
+            var Data = _itemModel.Get_Item_Data(itemid);
+
+            return Json(new { Data }, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #endregion
 
         #region 動作
