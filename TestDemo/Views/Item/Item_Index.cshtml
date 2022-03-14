@@ -162,11 +162,11 @@
                         },
                     })
                         .then(function (response) {
-                            if ($.trim(response.data) == "true") {
+                            if ($.trim(response.data)) {
                                 form.serverlist.splice(index, 1)
                             }
                             else {
-                                alert("刪除失敗！" + response.data)
+                                alert("刪除失敗！")
                             }
                         })
                         .catch(function (error) {

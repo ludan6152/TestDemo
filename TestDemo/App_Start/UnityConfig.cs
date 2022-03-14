@@ -1,5 +1,5 @@
 using System;
-using TestDemo.Models;
+using TestDemo.Repositories;
 using Unity;
 
 namespace TestDemo
@@ -43,7 +43,7 @@ namespace TestDemo
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
 
-            container.RegisterType<IItemModel, ItemModel>();
+            container.RegisterType<IItemDAO, ItemDAO>();
         }
     }
 }
