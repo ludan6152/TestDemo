@@ -1,5 +1,6 @@
 using System;
 using TestDemo.Repositories;
+using TestDemo.Services;
 using Unity;
 
 namespace TestDemo
@@ -44,6 +45,7 @@ namespace TestDemo
             // container.RegisterType<IProductRepository, ProductRepository>();
 
             container.RegisterType<IItemDAO, ItemDAO>();
+            container.RegisterType<IItemService, ItemService>();
         }
     }
 }
