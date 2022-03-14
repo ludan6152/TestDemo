@@ -106,26 +106,47 @@
                     })
             }, //取得項目清單
             Update_Item: function (item) {
-                axios({
-                    url: "../Item/Update_Item",
-                    method: "POST",
-                    data: {
-                        data: item,
-                        newitem: item.newitem,
-                    },
-                })
-                    .then(function (response) {
-                        if ($.trim(response.data) == "true") {
-                            item.newitem = false
-                            item.showupdate = !item.showupdate
-                        }
-                        else {
-                            alert("修改失敗！" + response.data)
-                        }
+                if (item.newitem) {
+                    axios({
+                        url: "../Item/Insert_Item",
+                        method: "POST",
+                        data: {
+                            data: item,
+                        },
                     })
-                    .catch(function (error) {
-                        alert(error)
+                        .then(function (response) {
+                            if ($.trim(response.data) == "true") {
+                                item.newitem = false
+                                item.showupdate = !item.showupdate
+                            }
+                            else {
+                                alert("新增失敗！" + response.data)
+                            }
+                        })
+                        .catch(function (error) {
+                            alert(error)
+                        })
+                }
+                else {
+                    axios({
+                        url: "../Item/Update_Item",
+                        method: "POST",
+                        data: {
+                            data: item,
+                        },
                     })
+                        .then(function (response) {
+                            if ($.trim(response.data)) {
+                                item.showupdate = !item.showupdate
+                            }
+                            else {
+                                alert("修改失敗！" + response.data)
+                            }
+                        })
+                        .catch(function (error) {
+                            alert(error)
+                        })
+                }
             }, //修改員工薪資項目
             Show_Update: function (item) {
                 item.showupdate = !item.showupdate

@@ -10,7 +10,7 @@ using TestDemo.Repositories;
 
 namespace TestDemo.Services
 {
-    public class ItemService
+    public class ItemService: IItemService
     {
         private readonly IItemDAO _itemDAO;
 
@@ -40,7 +40,21 @@ namespace TestDemo.Services
         #region 動作
 
         #region 修改項目
-        public string Update_Item(ItemModel data, bool newitem)
+        public bool Update_Item(ItemModel data)
+        {
+            return _itemDAO.Update_Item(data);
+        }
+        #endregion
+
+        #region 刪除項目
+        public bool Delete_Item(string itemid)
+        {
+            return _itemDAO.Delete_Item(itemid);
+        }
+        #endregion
+
+        #region 新增項目
+        public string Insert_Item(ItemModel data)
         {
             if (String.IsNullOrEmpty(_itemDAO.Get_Item_Data(data.itemid).itemid))
             {
@@ -51,27 +65,10 @@ namespace TestDemo.Services
             }
             else
             {
-                if (newitem)
-                {
-                    return "項目編號" + data.itemid + "已存在！";
-                }
-                else
-                {
-                    if (_itemDAO.Update_Item(data))
-                    {
-                        return "true";
-                    }
-                }
+                return "項目編號" + data.itemid + "已存在！";
             }
 
             return "";
-        }
-        #endregion
-
-        #region 刪除項目
-        public bool Delete_Item(string itemid)
-        {
-            return _itemDAO.Delete_Item(itemid);
         }
         #endregion
 

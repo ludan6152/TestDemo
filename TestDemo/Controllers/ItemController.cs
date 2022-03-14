@@ -11,11 +11,11 @@ namespace TestDemo.Controllers
 {
     public class ItemController : Controller
     {
-        private readonly ItemService _itemService;
+        private readonly IItemService _itemService;
 
-        public ItemController()
+        public ItemController(IItemService itemService)
         {
-            _itemService = new ItemService(new ItemDAO());
+            _itemService = itemService;
         }
 
         #region 畫面
@@ -54,9 +54,9 @@ namespace TestDemo.Controllers
         #region 動作
 
         #region 修改項目
-        public string Update_Item(ItemModel data, bool newitem)
+        public bool Update_Item(ItemModel data)
         {
-            return _itemService.Update_Item(data, newitem);
+            return _itemService.Update_Item(data);
         }
         #endregion
 
@@ -64,6 +64,13 @@ namespace TestDemo.Controllers
         public bool Delete_Item(string itemid)
         {
             return _itemService.Delete_Item(itemid);
+        }
+        #endregion
+
+        #region 新增項目
+        public string Insert_Item(ItemModel data)
+        {
+            return _itemService.Insert_Item(data);
         }
         #endregion
 
